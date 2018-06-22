@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: music-client
+  namespace: default
+  labels:
+    purpose: "generate-http-load"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "music-client"
+  template:
+    metadata:
+      annotations:
+        kubeturbo.io/purpose: "test-istio"
+      labels:
+        app: "music-client"
+    spec:
+      serviceAccount: default
+      containers:
+      - name: webclient
+        image: beekman9527/webclient:v1
+        imagePullPolicy: Always
+        args:
+        - --v=3
+        - --threadNum=16
+        - --target=http://music.default:8080/cpuwork.php/?cpu=10
+        - --rps=4

@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: music
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "music-app-pods"
+  template:
+    metadata:
+      labels:
+        app: "music-app-pods"
+        purpose: "service-test"
+    spec:
+      containers:
+      - name: "web-app"
+        image: beekman9527/webapp
+        resources:
+          limits:
+            cpu: "15m"
+          requests:
+            cpu: "2m"
+        ports: 
+        - containerPort: 8080
