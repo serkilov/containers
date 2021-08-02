@@ -19,8 +19,8 @@ gcc cpu.c -o $cpubin
 gcc nummem.c -o $memorybin
 chmod +x $cpubin
 chmod +x $memorybin
-./$memorybin $MEMORY_NUM | tee $logfile
-./$cpubin $CPU_PERCENT | tee $logfile
+./$memorybin $MEMORY_NUM | tee $logfile &
+./$cpubin $CPU_PERCENT | tee $logfile &
 
 echo "[`date`] end of running"
 exit 0
