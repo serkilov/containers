@@ -2,11 +2,7 @@
 
 logfile="run.log"
 
-if [ "X$RUN_TYPE" = "X" ] ; then
-    RUN_TYPE="memory"
-fi
-
-echo "[`date`] begin to run $RUN_TYPE-test " 
+echo "[`date`] begin to run test"
 if [ "X$MEMORY_NUM" = "X" ] ; then
     MEMORY_NUM=100
 fi
@@ -19,15 +15,12 @@ fi
 cpubin=cpubin
 memorybin=membin
 
-if [ "$RUN_TYPE" = "memory" ] ; then
-    gcc nummem.c -o $memorybin
-    chmod +x $memorybin
-    ./$memorybin $MEMORY_NUM | tee $logfile 
-else
-    gcc cpu.c -o $cpubin
-    chmod +x $cpubin
-    ./$cpubin $CPU_PERCENT | tee $logfile
-fi
+gcc cpu.c -o $cpubin
+gcc nummem.c -o $memorybin
+chmod +x $cpubin
+chmod +x $memorybin
+./$memorybin $MEMORY_NUM | tee $logfile
+./$cpubin $CPU_PERCENT | tee $logfile
 
 echo "[`date`] end of running"
 exit 0
