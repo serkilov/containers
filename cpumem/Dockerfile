@@ -8,6 +8,7 @@ RUN chmod 777 /var/xxx
 COPY ./src/nummem.c /var/xxx/
 COPY ./src/mem.c /var/xxx/
 COPY ./src/cpu.c /var/xxx/
+COPY ./src/cpumem.c /var/xxx/
 COPY ./src/run.sh /var/xxx/
 
 WORKDIR /var/xxx/ 
